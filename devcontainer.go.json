@@ -1,0 +1,36 @@
+{
+  "name": "Go Development Container",
+  "image": "mcr.microsoft.com/vscode/devcontainers/go:1.23",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "golang.go",
+        "mikestead.dotenv",
+        "buloco.theme-bluloco-light",
+        "chaitanyashahare.lazygit",
+        "davidanson.vscode-markdownlint"
+      ],
+      "settings": {
+        "extensions.verifySignature": false,
+        "go.toolsManagement.autoUpdate": true,
+        "go.useLanguageServer": true,
+        "go.lintTool": "golangci-lint",
+        "editor.formatOnSave": true
+      }
+    }
+  },
+  "features": {
+    "ghcr.io/guiyomh/features/golangci-lint:0": {},
+    "ghcr.io/devcontainers/features/go:1": {},
+    "ghcr.io/georgofenbeck/features/lazygit-linuxbinary:1": {}
+  },
+  "remoteEnv": {
+    "GOPROXY": "direct"
+  },
+  "forwardPorts": [8090],
+  "postStartCommand": "go mod vendor && go install github.com/air-verse/air@latest",
+  "mounts": [
+    "source=${env:HOME}${env:USERPROFILE}/.aws,target=/root/.aws,type=bind",
+    "source=${env:HOME}${env:USERPROFILE}/.ssh,target=/root/.ssh,type=bind"
+  ]
+}

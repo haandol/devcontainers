@@ -1,0 +1,32 @@
+{
+  "name": "Python Docker",
+  "build": {
+    "context": ".",
+    "dockerfile": "./Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/aws-cli:1": {},
+    "ghcr.io/mikaello/devcontainer-features/modern-shell-utils:1": {},
+    "ghcr.io/devcontainers/features/sshd:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "extensions.verifySignature": false
+      },
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "charliermarsh.ruff",
+        "ms-python.flake8",
+        "PKief.material-icon-theme",
+        "aaron-bond.better-comments",
+        "oderwat.indent-rainbow"
+      ]
+    }
+  },
+  "postCreateCommand": "pip install -r requirements.txt",
+  "mounts": [
+    "source=${env:HOME}${env:USERPROFILE}/.aws,target=/root/.aws,type=bind",
+    "source=${env:HOME}${env:USERPROFILE}/.ssh,target=/root/.ssh,type=bind"
+  ]
+}
